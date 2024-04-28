@@ -2,6 +2,8 @@
 
 import { register } from 'register-service-worker'
 
+import { precacheAndRoute } from 'workbox-precaching';
+
 if (process.env.NODE_ENV === 'production') {
   register(`${process.env.BASE_URL}service-worker.js`, {
     ready () {
@@ -30,3 +32,14 @@ if (process.env.NODE_ENV === 'production') {
     }
   })
 }
+
+precacheAndRoute([
+  { url: '/index.html', revision: 'v1' },
+  { url: '/styles.css', revision: 'v1' },
+  { url: '/app.js', revision: 'v1' },
+
+  { url:  'https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js', revision: 'v2' },
+
+ 
+  // Add more assets here
+ ]);
